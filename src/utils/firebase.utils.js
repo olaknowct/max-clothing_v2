@@ -1,6 +1,7 @@
 import { initializeApp } from 'firebase/app';
 
 import { getAuth, signInWithRedirect, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDLtFdI80oFIeIYUSlhY_AKWsWMlSQ6qVM',
@@ -22,3 +23,14 @@ provider.setCustomParameters({
 export const auth = getAuth();
 
 export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
+
+export const db = getFirestore();
+
+export const createUserDocumentFromAuth = async (userAuth) => {
+  // google create an object that are not persisted in database
+  // this object is a reference that google can use and get/set to db
+  const userDocRef = doc(db, 'users', userAuth.uid);
+
+  // has method of exist. since getdoc is just getting some doc based on the ref we passed, doesn mean it is created in db
+  const userSnapshot = await getDoc(userDocRef);
+};
