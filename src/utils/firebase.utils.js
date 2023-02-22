@@ -31,6 +31,18 @@ export const createUserDocumentFromAuth = async (userAuth) => {
   // this object is a reference that google can use and get/set to db
   const userDocRef = doc(db, 'users', userAuth.uid);
 
-  // has method of exist. since getdoc is just getting some doc based on the ref we passed, doesn mean it is created in db
   const userSnapshot = await getDoc(userDocRef);
+
+  if (!userSnapshot.exists()) {
+    const { displayName, email } = userAuth;
+    const createdAt = new Date();
+
+    try {
+      await setDoc(userDocRef, { displayName, email, createdAt });
+    } catch (error) {
+      console.log('error creating the user', error.message);
+    }
+  }
+
+  return userDocRef;
 };
