@@ -25,9 +25,14 @@ export const CartProvider = ({ children }) => {
   const [cartItems, setIsCartItems] = useState([]);
   const [cartCount, setCartCount] = useState(0);
 
+  useEffect(() => {
+    const newCartCount = cartItems.reduce((total, cartItem) => total + cartItem.quantity, 0);
+    setCartCount(newCartCount);
+  }, [cartItems]);
+
   const addItemToCart = (productToAdd) => {
     setIsCartItems(addCartItem(cartItems, productToAdd));
-    setCartCount((currentTotal) => currentTotal + 1);
+    // setCartCount((currentTotal) => currentTotal + 1);
   };
 
   const value = { isCartOpen, setIsCartOpen, addItemToCart, cartCount };
