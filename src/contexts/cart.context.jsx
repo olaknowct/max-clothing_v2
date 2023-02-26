@@ -1,0 +1,15 @@
+import { useState, createContext } from 'react';
+
+import PRODUCTS from '../shop-data.json';
+
+export const CartContext = createContext({
+  isCartOpen: [],
+  setIsCartOpen: () => {},
+});
+
+export const CartProvider = ({ children }) => {
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const value = { isCartOpen, setIsCartOpen };
+
+  return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
+};
