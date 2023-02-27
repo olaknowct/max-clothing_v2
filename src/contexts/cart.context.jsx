@@ -23,12 +23,17 @@ const removeCartItem = (cartItems, cartItemToRemove) => {
   }
 };
 
+const clearCartItem = (cartItems, cartItemToClear) => {
+  return cartItems.filter((cartItem) => cartItem.id !== cartItemToClear.id);
+};
+
 export const CartContext = createContext({
   isCartOpen: [],
   setIsCartOpen: () => {},
   cartItems: [],
   addItemToCart: () => {},
   removeItemFromCart: () => {},
+  clearItemFromCart: () => {},
   cartCount: 0,
 });
 
@@ -52,7 +57,12 @@ export const CartProvider = ({ children }) => {
     // setCartCount((currentTotal) => currentTotal + 1);
   };
 
-  const value = { isCartOpen, setIsCartOpen, addItemToCart, cartItems, cartCount, removeItemToCart };
+  const clearItemFromCart = (cartItemToClear) => {
+    setIsCartItems(clearCartItem(cartItems, cartItemToClear));
+    // setCartCount((currentTotal) => currentTotal + 1);
+  };
+
+  const value = { isCartOpen, setIsCartOpen, addItemToCart, cartItems, cartCount, removeItemToCart, clearItemFromCart };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 };
