@@ -35,12 +35,19 @@ export const CartContext = createContext({
   removeItemFromCart: () => {},
   clearItemFromCart: () => {},
   cartCount: 0,
+  carTotal: 0,
 });
 
 export const CartProvider = ({ children }) => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [cartItems, setIsCartItems] = useState([]);
   const [cartCount, setCartCount] = useState(0);
+  const [carTotal, setCartTotal] = useState(0);
+
+  useEffect(() => {
+    const newCartTotal = cartItems.reduce((total, cartItem) => total + cartItem.quantity * cartItem.price, 0);
+    setCartTotal(newCartTotal);
+  }, [cartItems]);
 
   useEffect(() => {
     const newCartCount = cartItems.reduce((total, cartItem) => total + cartItem.quantity, 0);
@@ -62,7 +69,7 @@ export const CartProvider = ({ children }) => {
     // setCartCount((currentTotal) => currentTotal + 1);
   };
 
-  const value = { isCartOpen, setIsCartOpen, addItemToCart, cartItems, cartCount, removeItemToCart, clearItemFromCart };
+  const value = { isCartOpen, setIsCartOpen, addItemToCart, cartItems, cartCount, removeItemToCart, clearItemFromCart, carTotal };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 };
