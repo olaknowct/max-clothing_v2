@@ -16,6 +16,6 @@ export const userReducer = (state = INITIAL_STATE, action) => {
         currentUser: payload,
       };
     default:
-      throw new Error(`Unhandled Type ${type} in userReducer`);
+      return state;
   }
 };
