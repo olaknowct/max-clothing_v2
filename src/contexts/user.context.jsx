@@ -1,5 +1,4 @@
-import { createContext, useEffect, useReducer } from 'react';
-import { createUserDocumentFromAuth, onAuthStateChangedListener } from '../utils/firebase.utils';
+import { createContext, useReducer } from 'react';
 import { createAction } from '../utils/reducer/reducer.utils';
 // as the actual value you want to access
 export const UserContext = createContext({
@@ -41,20 +40,6 @@ export const UserProvider = ({ children }) => {
 
   // signOutUser(); // if you want to signout from firebase
 
-  // unsubcribe once run
-  useEffect(() => {
-    // call back will run every time there is changes from our auth
-    // checks if user are authenticate
-    const unsubscribe = onAuthStateChangedListener((user) => {
-      if (user) {
-        createUserDocumentFromAuth(user);
-      }
-
-      setCurrentUser(user);
-    });
-
-    return unsubscribe;
-  }, []);
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };
 
