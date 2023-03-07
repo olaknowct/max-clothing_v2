@@ -3,7 +3,8 @@ import { createSelector } from 'reselect';
 const selectCartReducer = (state) => {
   return state.cart;
 };
-
+// 1st and 2nd argument runs for the first time
+// 2nd argument dont run when first argument didn't change
 export const selectCartItems = createSelector([selectCartReducer], (cart) => {
   return cart.cartItems;
 });

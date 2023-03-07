@@ -1,5 +1,5 @@
 import { applyMiddleware, compose, legacy_createStore as createStore } from 'redux';
-import logger from 'redux-logger';
+// import logger from 'redux-logger';
 import { rootReducer } from './root-reducer';
 
 const loggerMiddleware = (store) => (next) => (action) => {
