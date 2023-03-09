@@ -1,4 +1,4 @@
-import { getCategoriesAndDocuments } from '../../utils/firebase.utils';
+// import { getCategoriesAndDocuments } from '../../utils/firebase.utils';
 import { createAction } from '../../utils/reducer/reducer.utils';
 import { CATEGORIES_ACTION_TYPES } from './category.types';
 
@@ -19,12 +19,12 @@ export const fetchCategoriesFailed = (error) => {
 };
 
 // Thunks
-export const fetchCategoriesAsync = () => async (dispatch) => {
-  dispatch(fetchCategoriesStart());
-  try {
-    const categoriesArray = await getCategoriesAndDocuments();
-    dispatch(fetchCategoriesSuccess(categoriesArray));
-  } catch (error) {
-    dispatch(fetchCategoriesFailed());
-  }
-};
+// export const fetchCategoriesAsync = () => async (dispatch) => {
+//   dispatch(fetchCategoriesStart());
+//   try {
+//     const categoriesArray = await getCategoriesAndDocuments();
+//     dispatch(fetchCategoriesSuccess(categoriesArray));
+//   } catch (error) {
+//     dispatch(fetchCategoriesFailed());
+//   }
+// };
