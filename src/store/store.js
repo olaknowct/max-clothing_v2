@@ -27,7 +27,10 @@ const middlewares = [process.env.NODE_ENV !== 'production' && logger].filter(Boo
 // // Root-reducer
 export const store = configureStore({
   reducer: rootReducer, // points to reducer
-  middleware: middlewares, // has default middleware but if declared then default are overlapped
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }).concat(middlewares), // has default middleware but if we passed an array then default are override, oth function let you use configured middleware + default
 });
 
 // export const persistor = persistStore(store);
