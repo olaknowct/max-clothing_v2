@@ -4,10 +4,10 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 
 import App from './App';
-import { persistor, store } from './store/store';
+import { store } from './store/store';
 
 import './index.scss';
-import { PersistGate } from 'redux-persist/integration/react';
+// import { PersistGate } from 'redux-persist/integration/react';
 // import reportWebVitals from './reportWebVitals';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
