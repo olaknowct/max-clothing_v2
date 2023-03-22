@@ -1,4 +1,4 @@
-import { takeLatest, all, call, put } from 'typed-redux-saga';
+import { takeLatest, all, call, put } from 'typed-redux-saga/macro';
 import { getCategoriesAndDocuments } from '../../utils/firebase.utils';
 import { fetchCategoriesFailed, fetchCategoriesSuccess } from './category.action';
 import { CATEGORIES_ACTION_TYPES } from './category.types';
@@ -21,9 +21,9 @@ export function* fetchCategoriesAsync() {
 // the moment i hear the category action types dot start
 // responding to category start
 export function* onFetchCategories() {
-  yield takeLatest(CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_START, fetchCategoriesAsync);
+  yield* takeLatest(CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_START, fetchCategoriesAsync);
 }
 
 export function* categoriesSaga() {
-  yield all([call(onFetchCategories)]); // run everything inside and only complete when all of it is done
+  yield* all([call(onFetchCategories)]); // run everything inside and only complete when all of it is done
 }
