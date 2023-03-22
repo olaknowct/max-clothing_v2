@@ -1,5 +1,3 @@
-import { StringLiteral } from 'typescript';
-
 export enum CATEGORIES_ACTION_TYPES {
   FETCH_CATEGORIES_START = 'category/FETCH_CATEGORIES_START',
   FETCH_CATEGORIES_SUCCESS = 'category/FETCH_CATEGORIES_SUCCESS',
