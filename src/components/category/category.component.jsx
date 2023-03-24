@@ -1,18 +1,45 @@
-import { useContext, useEffect, useState } from 'react';
+import { gql, useQuery } from '@apollo/client';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { CategoriesContext } from '../../contexts/categories.context';
 import ProductCard from '../product-card/product-card.component';
 import Spinner from '../spinner/spinner.component';
 import './category.styles.scss';
 
+const GET_CATEGORY = gql`
+  query ($title: string!) {
+    getCollectionByTitle(title: $title) {
+      id
+      title
+      items {
+        id
+        name
+        price
+        imageUrl
+      }
+    }
+  }
+`;
+
 const Category = () => {
   const { category } = useParams();
-  const { categoriesMap, loading } = useContext(CategoriesContext);
-  const [products, setProducts] = useState(categoriesMap[category]);
+
+  const { loading, data } = useQuery(GET_CATEGORY, {
+    variables: {
+      title: category,
+    },
+  });
+
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    setProducts(categoriesMap[category]);
-  }, [category, categoriesMap]);
+    if (data) {
+      const {
+        getCollectionsByTitle: { items },
+      } = data;
+
+      setProducts(items);
+    }
+  }, [category, data]);
 
   return (
     <>
