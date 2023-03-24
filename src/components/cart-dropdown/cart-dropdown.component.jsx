@@ -14,7 +14,7 @@ const CartDropdown = () => {
 
   const goToCheckoutHandler = useCallback(() => {
     navigate('/checkout');
-  }, []);
+  }, []); // navigate does not change, put navigate to avoid es lint
 
   return (
     <CartDropDownContainer>
