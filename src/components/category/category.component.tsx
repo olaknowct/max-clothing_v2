@@ -7,7 +7,7 @@ import {
 } from '../../store/categories/category.selector';
 import ProductCard from '../product-card/product-card.component';
 import Spinner from '../spinner/spinner.component';
-import './category.styles.tsx';
+import { CategoryContainer, Title } from './category.styles';
 
 type CategoryRouteParams = {
   category: string;
@@ -26,14 +26,14 @@ const Category = () => {
 
   return (
     <>
-      <h2 className='category-title'>{category.toUpperCase()}</h2>
+      <Title>{category.toUpperCase()}</Title>
       {isLoading ? (
         <Spinner />
       ) : (
-        <div className='category-container'>
+        <CategoryContainer>
           {products &&
             products.map((product) => <ProductCard key={product.id} product={product} />)}
-        </div>
+        </CategoryContainer>
       )}
     </>
   );
